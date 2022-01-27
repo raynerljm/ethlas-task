@@ -1,9 +1,55 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { prisma } from "../lib/prisma";
+import { Vote } from "../types";
+import { useEffect, useState } from "react";
+import { MAX_PERSON_ID, MIN_PERSON_ID, STARWARS_API } from "../constants";
+import { GetPerson, GetTwoPersons } from "./api/person";
+import { getTwoIds } from "../utils/getRandomPerson";
 
-const Home: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async () => {
+  const votes: Vote[] = await prisma.vote.findMany();
+  const { first, second } = getTwoIds();
+  return {
+    props: {
+      votes,
+      first,
+      second,
+    },
+  };
+};
+
+const Home: NextPage = ({
+  votes,
+  first,
+  second,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { person: firstPerson, loading: loadingFirst } = GetPerson(first);
+  const { person: secondPerson, loading: loadingSecond } = GetPerson(second);
+
+  const loading = loadingFirst || loadingSecond;
+
+  async function saveVote(vote: Vote) {
+    const response = await fetch("/api/vote", {
+      method: "POST",
+      body: JSON.stringify(vote),
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    return await response.json();
+  }
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,43 +60,9 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {firstPerson.name} vs {secondPerson.name}
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <button>Vote</button>
       </main>
 
       <footer className={styles.footer}>
@@ -59,14 +71,14 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
