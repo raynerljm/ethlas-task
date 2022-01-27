@@ -5,3 +5,38 @@
 body {
   @apply font-overpass;
 }
+
+@layer components {
+  .bg-gradient-blue {
+    @apply bg-gradient-to-l from-ethlas-blue to-ethlas-purple;
+  }
+
+  .bg-gradient-orange {
+    @apply bg-gradient-to-b from-ethlas-orange to-ethlas-yellow;
+  }
+
+  .animate-sand {
+    padding: 0 15px;
+    @apply animate-jumb text-ethlas-yellow;
+  }
+
+  .animate-sand-1 {
+    @apply animate-sand;
+    animation-delay: 0s;
+  }
+
+  .animate-sand-2 {
+    @apply animate-sand;
+    animation-delay: 0.1s;
+  }
+
+  .animate-sand-3 {
+    @apply animate-sand;
+    animation-delay: 0.2s;
+  }
+
+  .animate-sand-4 {
+    @apply animate-sand;
+    animation-delay: 0.3s;
+  }
+}

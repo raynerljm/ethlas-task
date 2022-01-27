@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { PersonImage } from "../types";
+import { useState } from "react";
+import { Person } from "../types";
 
 const Seed: NextPage = () => {
   const [seeded, setSeeded] = useState(false);
@@ -12,13 +12,14 @@ const Seed: NextPage = () => {
     const data = await res.json();
 
     for (const person of data) {
-      const personImage: PersonImage = {
+      const personObject: Person = {
         id: person.id,
+        name: person.name,
         image: person.image,
       };
-      const response = await fetch("/api/personImage", {
+      const response = await fetch("/api/person", {
         method: "POST",
-        body: JSON.stringify(personImage),
+        body: JSON.stringify(personObject),
       });
       if (!response.ok) {
         throw new Error(response.statusText);

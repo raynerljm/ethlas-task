@@ -3,48 +3,43 @@ import type {
   InferGetServerSidePropsType,
   NextPage,
 } from "next";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import Loading from "../components/Loading";
+import PersonCard from "../components/PersonCard";
 import { prisma } from "../lib/prisma";
-import { Vote } from "../types";
-import { GetPerson } from "./api/person";
 import { getTwoIds } from "../utils/getRandomPerson";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { first, second } = getTwoIds();
-  const firstImage = await prisma.personImage.findUnique({
+  const firstPerson = await prisma.person.findUnique({
     where: { id: first },
   });
-  const secondImage = await prisma.personImage.findUnique({
+  const secondPerson = await prisma.person.findUnique({
     where: { id: second },
   });
   return {
     props: {
-      first,
-      second,
-      firstImage: firstImage?.image,
-      secondImage: secondImage?.image,
+      firstPerson,
+      secondPerson,
     },
   };
 };
 
 const Home: NextPage = ({
-  first,
-  second,
-  firstImage,
-  secondImage,
+  firstPerson,
+  secondPerson,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { person: firstPerson, loading: loadingFirst } = GetPerson(first);
-  const { person: secondPerson, loading: loadingSecond } = GetPerson(second);
-
-  const loading = loadingFirst || loadingSecond;
+  const router = useRouter();
 
   async function saveVote(selected: string) {
     const voteObject = { votedFor: null, votedAgainst: null };
     if (selected === "first") {
-      voteObject.votedFor = first;
-      voteObject.votedAgainst = second;
+      voteObject.votedFor = firstPerson.id;
+      voteObject.votedAgainst = secondPerson.id;
     } else {
-      voteObject.votedFor = second;
-      voteObject.votedAgainst = first;
+      voteObject.votedFor = secondPerson.id;
+      voteObject.votedAgainst = firstPerson.id;
     }
     const response = await fetch("/api/vote", {
       method: "POST",
@@ -53,23 +48,28 @@ const Home: NextPage = ({
 
     if (!response.ok) {
       throw new Error(response.statusText);
-    } else {
-      return await response.json();
     }
+    router.replace(router.asPath);
   }
 
-  if (loading) return <div>Loading...</div>;
-
   return (
-    <div className="min-h-screen bg-gray-800 text-white w-full flex flex-col justify-center items-center">
-      <div className="text-xl flex gap-4">
-        <button onClick={() => saveVote("first")}>{firstPerson.name}</button>
-        <span>vs</span>
-        <button onClick={() => saveVote("second")}>{secondPerson.name}</button>
-        <img src={firstImage} />
-        <img src={secondImage} />
+    <>
+      <Loading />
+      <div className="min-h-screen bg-gradient-blue w-full flex flex-col justify-center items-center">
+        <h1 className="text-4xl text-white">
+          Who dislikes{" "}
+          <span className="uppercase font-semibold text-amber-500">sand</span>{" "}
+          more?
+        </h1>
+        <div className="text-xl flex gap-4">
+          <PersonCard person={firstPerson} saveVote={() => saveVote("first")} />
+          <PersonCard
+            person={secondPerson}
+            saveVote={() => saveVote("second")}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

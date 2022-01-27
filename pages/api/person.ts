@@ -1,19 +1,21 @@
-import useSWR from "swr";
-import { STARWARS_API } from "../../constants";
-import type { Person } from "../../types";
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../lib/prisma";
+import { Person } from "../../types";
 
-const fetcher = (url: string): Promise<unknown> =>
-  fetch(url).then((res) => res.json());
+const createVote = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
 
-export const GetPerson = (id: number) => {
-  const { data, error } = <{ data: Person; error: unknown }>(
-    useSWR(`${STARWARS_API}people/${id}`, fetcher)
-  );
+  // Parse the stringifed body
+  const personData: Person = JSON.parse(req.body);
 
-  return {
-    loading: !data && !error,
-    error,
-    person: data,
-  };
+  const savedData = await prisma.person.create({
+    data: personData,
+  });
+
+  res.json(savedData);
 };
+
+export default createVote;
