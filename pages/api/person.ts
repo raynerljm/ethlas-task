@@ -16,21 +16,3 @@ export const GetPerson = (id: number) => {
     person: data,
   };
 };
-
-export const GetTwoPersons = () => {
-  const { first, second } = getTwoIds();
-
-  const { data: dataFirst, error: errorFirst } = <
-    { data: Person; error: unknown }
-  >useSWR(`${STARWARS_API}people/${first}`, fetcher);
-  const { data: dataSecond, error: errorSecond } = <
-    { data: Person; error: unknown }
-  >useSWR(`${STARWARS_API}people/${second}`, fetcher);
-
-  const loadingFirst = !errorFirst && !dataFirst;
-  const loadingSecond = !errorSecond && !dataSecond;
-  const loading = loadingFirst || loadingSecond;
-  const error = errorFirst || errorSecond;
-
-  return { loading, first: dataFirst, second: dataSecond, error };
-};
