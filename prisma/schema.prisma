@@ -15,3 +15,8 @@ model Vote {
   votedFor Int
   votedAgainst Int
 }
+
+model PersonImage {
+  id Int @id 
+  image String
+}

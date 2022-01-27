@@ -21,3 +21,8 @@ export type Person = {
   created: string;
   edited: string;
 };
+
+export type PersonImage = {
+  id: number;
+  image: string;
+};

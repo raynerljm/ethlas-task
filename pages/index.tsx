@@ -10,6 +10,7 @@ import { getTwoIds } from "../utils/getRandomPerson";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const votes: Vote[] = await prisma.vote.findMany();
+
   const { first, second } = getTwoIds();
   return {
     props: {
