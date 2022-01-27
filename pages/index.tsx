@@ -9,22 +9,28 @@ import { GetPerson } from "./api/person";
 import { getTwoIds } from "../utils/getRandomPerson";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const votes: Vote[] = await prisma.vote.findMany();
-
   const { first, second } = getTwoIds();
+  const firstImage = await prisma.personImage.findUnique({
+    where: { id: first },
+  });
+  const secondImage = await prisma.personImage.findUnique({
+    where: { id: second },
+  });
   return {
     props: {
-      votes,
       first,
       second,
+      firstImage: firstImage?.image,
+      secondImage: secondImage?.image,
     },
   };
 };
 
 const Home: NextPage = ({
-  votes,
   first,
   second,
+  firstImage,
+  secondImage,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { person: firstPerson, loading: loadingFirst } = GetPerson(first);
   const { person: secondPerson, loading: loadingSecond } = GetPerson(second);
@@ -60,6 +66,8 @@ const Home: NextPage = ({
         <button onClick={() => saveVote("first")}>{firstPerson.name}</button>
         <span>vs</span>
         <button onClick={() => saveVote("second")}>{secondPerson.name}</button>
+        <img src={firstImage} />
+        <img src={secondImage} />
       </div>
     </div>
   );
