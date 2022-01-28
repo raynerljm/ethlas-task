@@ -8,25 +8,28 @@ type Props = {
 const Results: FC<Props> = ({ votes }) => {
   const processVotes = (votes: Vote[]) => {
     const map = new Map();
-    for (const { votedFor, votedAgainst } of votes) {
-      if (!map.has(votedFor)) map.set(votedFor, [0, 0]);
-      if (!map.has(votedAgainst)) map.set(votedAgainst, [0, 0]);
-      map.get(votedFor)[0]++;
-      map.get(votedFor)[1]++;
-      map.get(votedAgainst)[1]++;
+    for (const { votedForName, votedAgainstName } of votes) {
+      if (!map.has(votedForName)) map.set(votedForName, { votes: 0, total: 0 });
+      if (!map.has(votedAgainstName))
+        map.set(votedAgainstName, { votes: 0, total: 0 });
+      map.get(votedForName).votes += 1;
+      map.get(votedForName).total += 1;
+      map.get(votedAgainstName).total += 1;
     }
-    const idAndCounts = Array.from(map.entries());
-    const idAndPercentages = idAndCounts.map((x) => [x[0], x[1][0] / x[1][1]]);
-    idAndPercentages.sort((a, b) => b[1] - a[1]);
-    return idAndPercentages;
+    const rankedNames = Array.from(map.entries())
+      .map((vote) => {
+        return { name: vote[0], percentage: vote[1].votes / vote[1].total };
+      })
+      .sort((a, b) => b.percentage - a.percentage);
+    return rankedNames;
   };
 
   return (
     <>
       <div>
         {processVotes(votes).map((vote) => (
-          <div key={vote[0]} className="text-white">
-            {vote[0]}: {vote[1]}
+          <div key={vote.name} className="text-white">
+            {vote.name}: {vote.percentage}
           </div>
         ))}
       </div>

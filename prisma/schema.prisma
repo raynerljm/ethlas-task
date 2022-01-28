@@ -13,7 +13,9 @@ datasource db {
 model Vote {
   id String @id @default(cuid())
   votedFor Int
+  votedForName String
   votedAgainst Int
+  votedAgainstName String
 }
 
 model Person {

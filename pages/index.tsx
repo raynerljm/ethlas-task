@@ -10,6 +10,7 @@ import Loading from "../components/Loading";
 import PersonCard from "../components/PersonCard";
 import Results from "../components/Results";
 import { prisma } from "../lib/prisma";
+import { Person, Vote } from "../types";
 import { getTwoIds } from "../utils/getRandomPerson";
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -34,22 +35,34 @@ const Home: NextPage = ({
   firstPerson,
   secondPerson,
   votes,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: {
+  firstPerson: Person;
+  secondPerson: Person;
+  votes: Vote[];
+}) => {
   const router = useRouter();
   const [countdown, setCountdown] = useState(0);
 
   async function saveVote(selected: string) {
-    const voteObject = { votedFor: null, votedAgainst: null };
+    let vote;
     if (selected === "first") {
-      voteObject.votedFor = firstPerson.id;
-      voteObject.votedAgainst = secondPerson.id;
+      vote = {
+        votedFor: firstPerson.id,
+        votedForName: firstPerson.name,
+        votedAgainst: secondPerson.id,
+        votedAgainstName: secondPerson.name,
+      };
     } else {
-      voteObject.votedFor = secondPerson.id;
-      voteObject.votedAgainst = firstPerson.id;
+      vote = {
+        votedFor: secondPerson.id,
+        votedForName: secondPerson.name,
+        votedAgainst: firstPerson.id,
+        votedAgainstName: firstPerson.name,
+      };
     }
     const response = await fetch("/api/vote", {
       method: "POST",
-      body: JSON.stringify(voteObject),
+      body: JSON.stringify(vote),
     });
 
     if (!response.ok) {
