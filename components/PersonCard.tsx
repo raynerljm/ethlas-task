@@ -22,7 +22,7 @@ const PersonCard: FC<Props> = ({ person, saveVote }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-8 group">
+      <div className="flex flex-col items-center gap-2 sm:gap-8 group">
         <div className="w-48 sm:w-64 md:w-72 relative">
           <Image
             src={imageError ? FALLBACK_IMAGE : person.image}
@@ -34,7 +34,9 @@ const PersonCard: FC<Props> = ({ person, saveVote }) => {
             onError={() => setImageError(true)}
           />
         </div>
-        <Button onClick={saveVote}>{person.name}</Button>
+        <Button onClick={saveVote} className="h-14 w-72">
+          {person.name}
+        </Button>
       </div>
     </>
   );

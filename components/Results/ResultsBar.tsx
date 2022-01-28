@@ -2,17 +2,19 @@ import { FC } from "react";
 
 type Props = {
   rankedName: { position: number; name: string; percentage: number };
-  votedForName: string;
+  voteSelection: { for: string; against: string };
 };
 
-const ResultsBar: FC<Props> = ({ rankedName, votedForName }) => {
+const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
   return (
     <>
       <div className="grid grid-cols-2 gap-4">
         <h1
           className={`whitespace-nowrap self-center ${
-            votedForName === rankedName.name
-              ? "text-ethlas-orange"
+            voteSelection.for === rankedName.name
+              ? "text-ethlas-yellow"
+              : voteSelection.against === rankedName.name
+              ? "text-red-500"
               : "text-white"
           }`}
         >
@@ -23,7 +25,13 @@ const ResultsBar: FC<Props> = ({ rankedName, votedForName }) => {
             {(rankedName.percentage * 100).toFixed(2)}%
           </span>
           <div
-            className={`bg-ethlas-orange h-full rounded-full absolute left-0`}
+            className={`${
+              voteSelection.for === rankedName.name
+                ? "bg-ethlas-yellow"
+                : voteSelection.against === rankedName.name
+                ? "bg-red-500"
+                : "bg-gray-400"
+            } h-full rounded-full absolute left-0`}
             style={{ width: `${rankedName.percentage * 100}%` }}
           />
         </div>

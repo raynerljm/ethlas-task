@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Body from "../components/Layout/Body";
 import Loading from "../components/EmptyStates/Loading";
 import PersonCard from "../components/PersonCard";
-import Results from "../components/Results";
+import Results from "../components/Results/Results";
 import { COUNTDOWN_TIME } from "../constants";
 import { prisma } from "../lib/prisma";
 import { Person, Vote } from "../types";
@@ -36,16 +36,11 @@ const Home: NextPage = ({
   firstPerson,
   secondPerson,
   votes,
-}: {
-  firstPerson: Person;
-  secondPerson: Person;
-  votes: Vote[];
-}) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const [countdown, setCountdown] = useState(0);
-  const [votedForName, setVotedForName] = useState("");
-
-  async function saveVote(selected: string, person: Person) {
+  const [voteSelection, setVoteSelection] = useState({ for: "", against: "" });
+  async function saveVote(selected: string) {
     const vote = {
       votedFor: selected === "first" ? firstPerson.id : secondPerson.id,
       votedForName: selected === "first" ? firstPerson.name : secondPerson.name,
@@ -63,7 +58,10 @@ const Home: NextPage = ({
     }
 
     router.replace(router.asPath);
-    setVotedForName(person.name);
+    setVoteSelection({
+      for: vote.votedForName,
+      against: vote.votedAgainstName,
+    });
     setCountdown(COUNTDOWN_TIME);
   }
 
@@ -79,25 +77,33 @@ const Home: NextPage = ({
     <>
       {/* <Loading /> */}
       <Body>
-        <div className="min-h-screen flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-4xl text-white text-center">
-            Who dislikes{" "}
-            <span className="uppercase font-semibold text-amber-500">sand</span>{" "}
-            more?
-          </h1>
-          {countdown === 0 ? (
-            <div className="text-xl flex flex-col sm:flex-row gap-4 sm:gap-16">
-              <PersonCard
-                person={firstPerson}
-                saveVote={() => saveVote("first", firstPerson)}
-              />
-              <PersonCard
-                person={secondPerson}
-                saveVote={() => saveVote("second", secondPerson)}
-              />
-            </div>
+        <div className="min-h-screen flex flex-col gap-8 sm:gap-4 justify-center items-center">
+          {countdown <= 0 ? (
+            <>
+              <h1 className="text-4xl text-white text-center">
+                Who dislikes{" "}
+                <span className="uppercase font-semibold text-amber-500">
+                  sand
+                </span>{" "}
+                more?
+              </h1>
+              <div className="text-xl flex flex-col sm:flex-row gap-12 sm:gap-16">
+                <PersonCard
+                  person={firstPerson}
+                  saveVote={() => saveVote("first")}
+                />
+                <PersonCard
+                  person={secondPerson}
+                  saveVote={() => saveVote("second")}
+                />
+              </div>
+            </>
           ) : (
-            <Results votes={votes} votedForName={votedForName} />
+            <Results
+              votes={votes}
+              voteSelection={voteSelection}
+              setCountdown={setCountdown}
+            />
           )}
         </div>
       </Body>
