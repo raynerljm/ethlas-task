@@ -1,14 +1,20 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import { STARWARS_API_AKABAB } from "../constants";
 import { Person } from "../types";
+
+/**
+ * Backfills the database with cached data of Star Wars people.
+ * The page is used to run the script.
+ *
+ * @returns {NextPage}
+ */
 
 const Backfill: NextPage = () => {
   const [seeded, setSeeded] = useState(false);
 
   const fetchData = async () => {
-    const res = await fetch(
-      "https://akabab.github.io/starwars-api/api/all.json"
-    );
+    const res = await fetch(STARWARS_API_AKABAB);
     const data = await res.json();
 
     for (const person of data) {

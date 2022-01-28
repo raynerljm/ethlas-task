@@ -1,7 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../lib/prisma";
+// import { prisma } from "../../lib/prisma";
 import { Person } from "../../types";
+
+const prisma = new PrismaClient();
 
 const createVote = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
