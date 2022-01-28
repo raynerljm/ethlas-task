@@ -1,6 +1,10 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import MyHead from "../components/MyHead";
 
+/**
+ * Document page used to import custom Google fonts.
+ */
+
 class MyDocument extends Document {
   render() {
     return (

@@ -1,5 +1,15 @@
 import { Vote } from "../types";
 
+/**
+ * Returns the votes per Person in descending order according to their vote percentages.
+ * Percentages are calculated with votes / total_votes.
+ *
+ * @param votes An array of Vote objects
+ * @param voteSelection Currently selected votes (only used in Summary page)
+ * @param limit The top k results to show
+ * @returns
+ */
+
 export const processVotes = (
   votes: Vote[],
   voteSelection: { for: string; against: string },
