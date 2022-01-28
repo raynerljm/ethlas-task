@@ -40,8 +40,10 @@ const Backfill: NextPage = () => {
     <Body>
       {seeding ? (
         <>
-          <h1 className="text-white text-2xl mb-8">Seeding in progress...</h1>
-          <div className="flex flex-col gap-1">
+          <h1 className="text-white text-2xl mb-8 pt-4">
+            Backfilling in progress...
+          </h1>
+          <div className="flex flex-col gap-1 pb-4">
             {log.map((person) => (
               <div key={person.id} className="text-gray-300">
                 {person.id}: {person.name} has been cached in the database
