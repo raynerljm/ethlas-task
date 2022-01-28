@@ -6,9 +6,10 @@ import type {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Body from "../components/Layout/Body";
-import Loading from "../components/Loading";
+import Loading from "../components/EmptyStates/Loading";
 import PersonCard from "../components/PersonCard";
 import Results from "../components/Results";
+import { COUNTDOWN_TIME } from "../constants";
 import { prisma } from "../lib/prisma";
 import { Person, Vote } from "../types";
 import { getTwoIds } from "../utils/getRandomPerson";
@@ -42,24 +43,16 @@ const Home: NextPage = ({
 }) => {
   const router = useRouter();
   const [countdown, setCountdown] = useState(0);
+  const [votedForName, setVotedForName] = useState("");
 
-  async function saveVote(selected: string) {
-    let vote;
-    if (selected === "first") {
-      vote = {
-        votedFor: firstPerson.id,
-        votedForName: firstPerson.name,
-        votedAgainst: secondPerson.id,
-        votedAgainstName: secondPerson.name,
-      };
-    } else {
-      vote = {
-        votedFor: secondPerson.id,
-        votedForName: secondPerson.name,
-        votedAgainst: firstPerson.id,
-        votedAgainstName: firstPerson.name,
-      };
-    }
+  async function saveVote(selected: string, person: Person) {
+    const vote = {
+      votedFor: selected === "first" ? firstPerson.id : secondPerson.id,
+      votedForName: selected === "first" ? firstPerson.name : secondPerson.name,
+      votedAgainst: selected === "first" ? secondPerson.id : firstPerson.id,
+      votedAgainstName:
+        selected === "first" ? secondPerson.name : firstPerson.name,
+    };
     const response = await fetch("/api/vote", {
       method: "POST",
       body: JSON.stringify(vote),
@@ -69,9 +62,9 @@ const Home: NextPage = ({
       throw new Error(response.statusText);
     }
 
-    setCountdown(3);
-
     router.replace(router.asPath);
+    setVotedForName(person.name);
+    setCountdown(COUNTDOWN_TIME);
   }
 
   useEffect(() => {
@@ -96,15 +89,15 @@ const Home: NextPage = ({
             <div className="text-xl flex flex-col sm:flex-row gap-4 sm:gap-16">
               <PersonCard
                 person={firstPerson}
-                saveVote={() => saveVote("first")}
+                saveVote={() => saveVote("first", firstPerson)}
               />
               <PersonCard
                 person={secondPerson}
-                saveVote={() => saveVote("second")}
+                saveVote={() => saveVote("second", secondPerson)}
               />
             </div>
           ) : (
-            <Results votes={votes} />
+            <Results votes={votes} votedForName={votedForName} />
           )}
         </div>
       </Body>

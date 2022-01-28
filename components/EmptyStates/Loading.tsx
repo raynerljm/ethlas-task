@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import Button from "./Button";
+import Button from "../Button";
 
 const Loading: FC = () => {
   const [faded, setFaded] = useState(false);

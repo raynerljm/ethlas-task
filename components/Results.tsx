@@ -1,11 +1,13 @@
 import { FC } from "react";
 import { Vote } from "../types";
+import ResultsBar from "./ResultsBar";
 
 type Props = {
   votes: Vote[];
+  votedForName: string;
 };
 
-const Results: FC<Props> = ({ votes }) => {
+const Results: FC<Props> = ({ votes, votedForName }) => {
   const processVotes = (votes: Vote[]) => {
     const map = new Map();
     for (const { votedForName, votedAgainstName } of votes) {
@@ -20,17 +22,26 @@ const Results: FC<Props> = ({ votes }) => {
       .map((vote) => {
         return { name: vote[0], percentage: vote[1].votes / vote[1].total };
       })
-      .sort((a, b) => b.percentage - a.percentage);
+      .sort((a, b) => b.percentage - a.percentage)
+      .map((rankedName, idx) => {
+        return { position: idx + 1, ...rankedName };
+      })
+      .filter(
+        (rankedName) =>
+          rankedName.position <= 3 || rankedName.name === votedForName
+      );
     return rankedNames;
   };
 
   return (
     <>
       <div>
-        {processVotes(votes).map((vote) => (
-          <div key={vote.name} className="text-white">
-            {vote.name}: {vote.percentage}
-          </div>
+        {processVotes(votes).map((rankedName) => (
+          <ResultsBar
+            rankedName={rankedName}
+            key={rankedName.name}
+            votedForName={votedForName}
+          />
         ))}
       </div>
     </>
