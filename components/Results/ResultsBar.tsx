@@ -30,7 +30,7 @@ const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
                 ? "bg-ethlas-yellow"
                 : voteSelection.against === rankedName.name
                 ? "bg-red-500"
-                : "bg-gray-400"
+                : "bg-gray-700"
             } h-full rounded-full absolute left-0`}
             style={{ width: `${rankedName.percentage * 100}%` }}
           />

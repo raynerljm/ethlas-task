@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Vote } from "../../types";
-import Countdown from "../Countdown";
+import Countdown from "./Countdown";
 import ResultsBar from "./ResultsBar";
 
 type Props = {
@@ -38,7 +38,7 @@ const Results: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
 
     return {
       rankedNames,
-      votedForCount: votedFor ? votedFor.votes : 0,
+      votedForCount: votedFor ? votedFor.votes - 1 : 0,
     };
   };
 
@@ -58,7 +58,7 @@ const Results: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
         <h1 className="text-white text-4xl text-center font-semibold mt-8">
           Rankings
         </h1>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-96">
           {rankedNames.map((rankedName) => (
             <ResultsBar
               rankedName={rankedName}

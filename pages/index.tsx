@@ -7,11 +7,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Body from "../components/Layout/Body";
 import Loading from "../components/EmptyStates/Loading";
-import PersonCard from "../components/PersonCard";
+import PersonCard from "../components/Cards/PersonCard";
 import Results from "../components/Results/Results";
 import { COUNTDOWN_TIME } from "../constants";
 import { prisma } from "../lib/prisma";
-import { Person, Vote } from "../types";
 import { getTwoIds } from "../utils/getRandomPerson";
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -75,12 +74,12 @@ const Home: NextPage = ({
 
   return (
     <>
-      {/* <Loading /> */}
+      <Loading />
       <Body>
         <div className="min-h-screen flex flex-col gap-8 sm:gap-4 justify-center items-center">
           {countdown <= 0 ? (
             <>
-              <h1 className="text-4xl text-white text-center">
+              <h1 className="text-4xl text-white text-center mb-12">
                 Who dislikes{" "}
                 <span className="uppercase font-semibold text-amber-500">
                   sand

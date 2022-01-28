@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import Image from "next/image";
-import { Person } from "../types";
-import Button from "./Button";
-import { FALLBACK_IMAGE } from "../constants";
+import { Person } from "../../types";
+import Button from "../Button";
+import { FALLBACK_IMAGE } from "../../constants";
 
 type Props = {
   person: Person;

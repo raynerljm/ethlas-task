@@ -1,7 +1,7 @@
 import { FC, SetStateAction, Dispatch } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { COUNTDOWN_TIME } from "../constants";
-import Button from "./Button";
+import { COUNTDOWN_TIME } from "../../constants";
+import Button from "../Button";
 
 type Props = {
   setCountdown: SetStateAction<Dispatch<number>>;
