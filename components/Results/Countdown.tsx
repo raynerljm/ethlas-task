@@ -4,7 +4,7 @@ import { COUNTDOWN_TIME } from "../../constants";
 import Button from "../Button";
 
 type Props = {
-  setCountdown: SetStateAction<Dispatch<number>>;
+  setCountdown: Dispatch<SetStateAction<number>>;
 };
 
 const Countdown: FC<Props> = ({ setCountdown }) => {

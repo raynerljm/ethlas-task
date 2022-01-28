@@ -6,7 +6,7 @@ import ResultsBar from "./ResultsBar";
 type Props = {
   votes: Vote[];
   voteSelection: { for: string; against: string };
-  setCountdown: SetStateAction<Dispatch<number>>;
+  setCountdown: Dispatch<SetStateAction<number>>;
 };
 
 const Results: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
