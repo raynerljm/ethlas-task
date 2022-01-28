@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Body from "../components/Layout/Body";
 import Loading from "../components/EmptyStates/Loading";
 import PersonCard from "../components/Cards/PersonCard";
-import Results from "../components/Results/Results";
+import Results from "../components/Results/SummaryResults";
 import { COUNTDOWN_TIME } from "../constants";
 import { prisma } from "../lib/prisma";
 import { getTwoIds } from "../utils/getRandomPerson";

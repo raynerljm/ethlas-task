@@ -1,5 +1,6 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Vote } from "../../types";
+import { processVotes } from "../../utils/processVotes";
 import Countdown from "./Countdown";
 import ResultsBar from "./ResultsBar";
 
@@ -10,39 +11,7 @@ type Props = {
 };
 
 const Results: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
-  const processVotes = (votes: Vote[]) => {
-    const map = new Map();
-    for (const { votedForName, votedAgainstName } of votes) {
-      if (!map.has(votedForName)) map.set(votedForName, { votes: 0, total: 0 });
-      if (!map.has(votedAgainstName))
-        map.set(votedAgainstName, { votes: 0, total: 0 });
-      map.get(votedForName).votes += 1;
-      map.get(votedForName).total += 1;
-      map.get(votedAgainstName).total += 1;
-    }
-    const rankedNames = Array.from(map.entries())
-      .map((vote) => {
-        return { name: vote[0], percentage: vote[1].votes / vote[1].total };
-      })
-      .sort((a, b) => b.percentage - a.percentage)
-      .map((rankedName, idx) => {
-        return { position: idx + 1, ...rankedName };
-      })
-      .filter(
-        (rankedName) =>
-          rankedName.position <= 3 ||
-          rankedName.name === voteSelection.for ||
-          rankedName.name === voteSelection.against
-      );
-    const votedFor = map.get(voteSelection.for);
-
-    return {
-      rankedNames,
-      votedForCount: votedFor ? votedFor.votes - 1 : 0,
-    };
-  };
-
-  const { rankedNames, votedForCount } = processVotes(votes || []);
+  const { rankedNames, votedForCount } = processVotes(votes, voteSelection, 3);
 
   return (
     <>
