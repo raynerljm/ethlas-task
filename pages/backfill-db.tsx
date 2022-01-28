@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { Person } from "../types";
 
-const Seed: NextPage = () => {
+const Backfill: NextPage = () => {
   const [seeded, setSeeded] = useState(false);
 
   const fetchData = async () => {
@@ -45,4 +45,4 @@ const Seed: NextPage = () => {
     </div>
   );
 };
-export default Seed;
+export default Backfill;
