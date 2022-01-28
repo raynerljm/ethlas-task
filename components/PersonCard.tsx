@@ -23,16 +23,17 @@ const PersonCard: FC<Props> = ({ person, saveVote }) => {
   return (
     <>
       <div className="flex flex-col items-center gap-8 group">
-        <Image
-          src={imageError ? FALLBACK_IMAGE : person.image}
-          alt={person.name}
-          layout="intrinsic"
-          width="256"
-          height="256"
-          className="aspect-square object-cover rounded-xl cursor-pointer group-hover:scale-95 transition-all"
-          onClick={saveVote}
-          onError={() => setImageError(true)}
-        />
+        <div className="w-48 sm:w-64 md:w-72 relative">
+          <Image
+            src={imageError ? FALLBACK_IMAGE : person.image}
+            alt={person.name}
+            width="288"
+            height="288"
+            className="aspect-square object-cover rounded-xl cursor-pointer group-hover:scale-95 transition-all"
+            onClick={saveVote}
+            onError={() => setImageError(true)}
+          />
+        </div>
         <Button onClick={saveVote}>{person.name}</Button>
       </div>
     </>
