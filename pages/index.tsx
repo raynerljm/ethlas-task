@@ -10,11 +10,8 @@ import Loading from "../components/EmptyStates/Loading";
 import PersonCard from "../components/Cards/PersonCard";
 import Results from "../components/Results/SummaryResults";
 import { COUNTDOWN_TIME } from "../constants";
-// import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma";
 import { getTwoIds } from "../utils/getRandomPerson";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { first, second } = getTwoIds();

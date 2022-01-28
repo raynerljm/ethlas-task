@@ -3,13 +3,10 @@ import type {
   InferGetServerSidePropsType,
   NextPage,
 } from "next";
-// import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma";
 import Body from "../components/Layout/Body";
 import ResultsBar from "../components/Results/ResultsBar";
 import { processVotes } from "../utils/processVotes";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const votes = await prisma.vote.findMany();

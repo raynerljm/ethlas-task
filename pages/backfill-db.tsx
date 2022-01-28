@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import Body from "../components/Layout/Body";
 import { STARWARS_API_AKABAB } from "../constants";
 import { Person } from "../types";
 
@@ -11,7 +12,8 @@ import { Person } from "../types";
  */
 
 const Backfill: NextPage = () => {
-  const [seeded, setSeeded] = useState(false);
+  const [seeding, setSeeding] = useState(false);
+  const [log, setLog] = useState<Person[]>([]);
 
   const fetchData = async () => {
     const res = await fetch(STARWARS_API_AKABAB);
@@ -30,25 +32,37 @@ const Backfill: NextPage = () => {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
+      setLog((log) => [...log, personObject]);
     }
   };
 
   return (
-    <div className="bg-black min-h-screen grid place-items-center">
-      {seeded ? (
-        <h1 className="text-white text-2xl">Seeding completed</h1>
+    <Body>
+      {seeding ? (
+        <>
+          <h1 className="text-white text-2xl mb-8">Seeding in progress...</h1>
+          <div className="flex flex-col gap-1">
+            {log.map((person) => (
+              <div key={person.id} className="text-gray-300">
+                {person.id}: {person.name} has been cached in the database
+              </div>
+            ))}
+          </div>
+        </>
       ) : (
-        <button
-          onClick={() => {
-            fetchData();
-            setSeeded(true);
-          }}
-          className="bg-white p-4"
-        >
-          Seed Database
-        </button>
+        <div className="grid place-items-center min-h-screen">
+          <button
+            onClick={() => {
+              fetchData();
+              setSeeding(true);
+            }}
+            className="bg-white text-xl font-semibold py-4 px-8 rounded-xl"
+          >
+            Seed Database
+          </button>
+        </div>
       )}
-    </div>
+    </Body>
   );
 };
 export default Backfill;

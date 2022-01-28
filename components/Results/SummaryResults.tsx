@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Vote } from "../../types";
 import { processVotes } from "../../utils/processVotes";
 import Countdown from "./Countdown";
@@ -10,7 +10,7 @@ type Props = {
   setCountdown: Dispatch<SetStateAction<number>>;
 };
 
-const Results: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
+const SummaryResults: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
   const { rankedNames, votedForCount } = processVotes(votes, voteSelection, 3);
 
   return (
@@ -41,4 +41,4 @@ const Results: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
     </>
   );
 };
-export default Results;
+export default SummaryResults;

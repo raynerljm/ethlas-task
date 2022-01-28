@@ -5,15 +5,22 @@ type Props = {
   onClick?: () => void;
   className?: string;
   href?: string;
+  isSubmitting?: boolean;
 };
 
-const Button: FC<Props> = ({ onClick, children, className, href }) => {
+const Button: FC<Props> = ({
+  onClick,
+  children,
+  className,
+  href,
+  isSubmitting,
+}) => {
   const withoutLink = (
     <button
       className={`bg-gradient-orange uppercase text-white font-semibold text-lg tracking-widest shadow-md rounded-full grid place-items-center group-hover:scale-95 transition-all group-hover:bg-gradient-blue ${className}`}
       onClick={onClick}
     >
-      {children}
+      {isSubmitting ? <span>Loading...</span> : children}
     </button>
   );
 
