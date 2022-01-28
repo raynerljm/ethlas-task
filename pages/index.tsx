@@ -5,6 +5,7 @@ import type {
 } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Body from "../components/Layout/Body";
 import Loading from "../components/Loading";
 import PersonCard from "../components/PersonCard";
@@ -53,17 +54,23 @@ const Home: NextPage = ({
     router.replace(router.asPath);
   }
 
+  useEffect(() => {
+    if (firstPerson === null || !secondPerson === null) {
+      router.replace(router.asPath);
+    }
+  }, [firstPerson, router, secondPerson]);
+
   return (
     <>
       <Loading />
       <Body>
         <div className="min-h-screen flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-4xl text-white">
+          <h1 className="text-4xl text-white text-center">
             Who dislikes{" "}
             <span className="uppercase font-semibold text-amber-500">sand</span>{" "}
             more?
           </h1>
-          <div className="text-xl flex gap-16">
+          <div className="text-xl flex flex-col sm:flex-row gap-4 sm:gap-16">
             <PersonCard
               person={firstPerson}
               saveVote={() => saveVote("first")}
