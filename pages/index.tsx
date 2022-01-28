@@ -5,6 +5,7 @@ import type {
 } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Body from "../components/Layout/Body";
 import Loading from "../components/Loading";
 import PersonCard from "../components/PersonCard";
 import { prisma } from "../lib/prisma";
@@ -55,20 +56,25 @@ const Home: NextPage = ({
   return (
     <>
       <Loading />
-      <div className="min-h-screen bg-gradient-blue w-full flex flex-col justify-center items-center">
-        <h1 className="text-4xl text-white">
-          Who dislikes{" "}
-          <span className="uppercase font-semibold text-amber-500">sand</span>{" "}
-          more?
-        </h1>
-        <div className="text-xl flex gap-4">
-          <PersonCard person={firstPerson} saveVote={() => saveVote("first")} />
-          <PersonCard
-            person={secondPerson}
-            saveVote={() => saveVote("second")}
-          />
+      <Body>
+        <div className="min-h-screen flex flex-col gap-4 justify-center items-center">
+          <h1 className="text-4xl text-white">
+            Who dislikes{" "}
+            <span className="uppercase font-semibold text-amber-500">sand</span>{" "}
+            more?
+          </h1>
+          <div className="text-xl flex gap-16">
+            <PersonCard
+              person={firstPerson}
+              saveVote={() => saveVote("first")}
+            />
+            <PersonCard
+              person={secondPerson}
+              saveVote={() => saveVote("second")}
+            />
+          </div>
         </div>
-      </div>
+      </Body>
     </>
   );
 };
