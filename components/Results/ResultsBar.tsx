@@ -34,7 +34,7 @@ const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
           <span className="z-10 text-center text-blue-100 group-hover:hidden">
             {(rankedName.percentage * 100).toFixed(2)}%
           </span>
-          <span className="z-10 text-center text-blue-100 hidden group-hover:inline">
+          <span className="hidden z-10 text-center text-blue-100 group-hover:inline">
             {rankedName.count} votes
           </span>
 

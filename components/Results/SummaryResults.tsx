@@ -1,10 +1,11 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { VoteMap } from "../../types";
 import { processVoteMap } from "../../utils/processVoteMap";
 import Countdown from "./Countdown";
 import ResultsBar from "./ResultsBar";
 
 type Props = {
-  voteMap: { [key: number]: { votes: number; total: number } };
+  voteMap: VoteMap;
   voteSelection: { for: string; against: string };
   setCountdown: Dispatch<SetStateAction<number>>;
 };
