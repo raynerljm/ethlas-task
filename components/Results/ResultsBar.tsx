@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { RankedName } from "../../types";
 
 type Props = {
-  rankedName: { position: number; name: string; percentage: number };
+  rankedName: RankedName;
   voteSelection: { for: string; against: string };
 };
 
@@ -17,7 +18,7 @@ type Props = {
 const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
   return (
     <>
-      <div className="grid grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 sm:gap-4">
+      <div className="grid grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 sm:gap-4 group">
         <h1
           className={`whitespace-nowrap self-center ${
             voteSelection.for === rankedName.name
@@ -30,16 +31,20 @@ const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
           {rankedName.position}. {rankedName.name}
         </h1>
         <div className="grid relative place-items-center w-full h-8 bg-gray-800 rounded-full">
-          <span className="z-10 text-center text-blue-100">
+          <span className="z-10 text-center text-blue-100 group-hover:hidden">
             {(rankedName.percentage * 100).toFixed(2)}%
           </span>
+          <span className="z-10 text-center text-blue-100 hidden group-hover:inline">
+            {rankedName.count} votes
+          </span>
+
           <div
             className={`${
               voteSelection.for === rankedName.name
                 ? "bg-ethlas-yellow"
                 : voteSelection.against === rankedName.name
                 ? "bg-red-500"
-                : "bg-gray-700"
+                : "bg-gray-700 group-hover:bg-gray-500"
             } h-full rounded-full absolute left-0`}
             style={{ width: `${rankedName.percentage * 100}%` }}
           />

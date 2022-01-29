@@ -60,6 +60,7 @@ const Home: NextPage = ({
   // Parse the people map from a string into a JSON object (acts as a HashMap for O(1) retrieval using person ID)
   const peopleMap = JSON.parse(peopleMapStringified);
   const [voteMap, setVoteMap] = useState(JSON.parse(voteMapStringified));
+  console.log(voteMap);
   // The two people currently being compared
   const [firstPerson, setFirstPerson] = useState<Person>();
   const [secondPerson, setSecondPerson] = useState<Person>();

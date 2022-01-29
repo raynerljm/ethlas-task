@@ -1,4 +1,4 @@
-import { Vote } from "../types";
+import { Vote, VoteMap } from "../types";
 import { updateVoteMap } from "./updateVoteMap";
 /**
  * Converts an array of votes into a Vote Map.
@@ -12,7 +12,7 @@ import { updateVoteMap } from "./updateVoteMap";
  */
 
 export const processVotes = (votes: Vote[]) => {
-  const voteMap: { [key: string]: { votes: number; total: number } } = {};
+  const voteMap: VoteMap = {};
   for (const vote of votes) {
     updateVoteMap(voteMap, vote);
   }

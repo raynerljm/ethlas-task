@@ -13,7 +13,7 @@ export type VoteMap = {
   [key: string]: VoteMapValue;
 };
 
-export type VoteMapValue = { votes: number; total: number };
+export type VoteMapValue = { votes: number; total: number; id: number };
 
 export type Person = {
   id: number;
@@ -22,7 +22,9 @@ export type Person = {
 };
 
 export type RankedName = {
+  id: number;
   name: string;
   percentage: number;
   position: number;
+  count: number;
 };

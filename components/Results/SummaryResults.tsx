@@ -40,7 +40,7 @@ const SummaryResults: FC<Props> = ({
         <h1 className="text-4xl font-semibold text-center text-white sm:mt-8">
           Rankings
         </h1>
-        <div className="flex flex-col gap-1 w-3/4">
+        <div className="flex flex-col gap-1 w-full">
           {rankedNames.map((rankedName) => (
             <ResultsBar
               rankedName={rankedName}
