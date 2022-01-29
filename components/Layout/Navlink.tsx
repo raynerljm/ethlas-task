@@ -15,7 +15,7 @@ type Props = {
 const Navlink: FC<Props> = ({ children, href }) => {
   return (
     <Link href={href} passHref>
-      <li className="text-white text-lg uppercase font-semibold list-none h-full grid place-items-center hover:text-gradient-orange transition-all cursor-pointer hover:scale-95">
+      <li className="grid place-items-center h-full text-lg font-semibold list-none text-white uppercase transition-all cursor-pointer hover:scale-95 hover:text-gradient-orange">
         {children}
       </li>
     </Link>

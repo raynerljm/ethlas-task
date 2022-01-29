@@ -10,12 +10,12 @@ import { GITHUB_LINK, LINKEDIN_LINK } from "../../constants";
 
 const Footer: FC = () => {
   return (
-    <footer className="fixed bottom-0 w-full h-8 flex items-center px-4 text-white text-lg">
+    <footer className="flex fixed bottom-0 items-center px-4 w-full h-8 text-lg text-white">
       <a
         href={GITHUB_LINK}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center gap-1 filter opacity-30 hover:opacity-100"
+        className="flex gap-1 items-center opacity-30 hover:opacity-100 filter"
       >
         <div className="flex items-center mb-1">
           <Image

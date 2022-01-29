@@ -39,21 +39,21 @@ const PersonCard: FC<Props> = ({ person, saveVote }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-2 sm:gap-8 group">
-        <div className="w-48 sm:w-64 md:w-72 relative">
+      <div className="flex flex-col gap-2 items-center sm:gap-8 group">
+        <div className="relative w-48 sm:w-64 md:w-72">
           <Image
             src={isImageError ? FALLBACK_IMAGE : person.image}
             alt={person.name}
             width="288"
             height="288"
-            className="aspect-square object-cover rounded-xl cursor-pointer group-hover:scale-95 transition-all"
+            className="object-cover rounded-xl transition-all cursor-pointer group-hover:scale-95 aspect-square"
             onClick={submit}
             onError={() => setImageError(true)}
           />
         </div>
         <Button
           onClick={submit}
-          className="h-14 w-72"
+          className="w-72 h-14"
           isSubmitting={isSubmitting}
         >
           {person.name}

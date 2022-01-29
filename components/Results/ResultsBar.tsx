@@ -29,8 +29,8 @@ const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
         >
           {rankedName.position}. {rankedName.name}
         </h1>
-        <div className="w-full h-8 bg-gray-800 rounded-full relative grid place-items-center">
-          <span className="text-blue-100 text-center z-10">
+        <div className="grid relative place-items-center w-full h-8 bg-gray-800 rounded-full">
+          <span className="z-10 text-center text-blue-100">
             {(rankedName.percentage * 100).toFixed(2)}%
           </span>
           <div

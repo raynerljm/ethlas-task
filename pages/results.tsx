@@ -36,8 +36,8 @@ const results: NextPage = ({
   return (
     <>
       <Navbar />
-      <Body className="flex flex-col items-center justify-center gap-8">
-        <h1 className="text-white text-center text-3xl">
+      <Body className="flex flex-col gap-8 justify-center items-center">
+        <h1 className="text-3xl text-center text-white">
           The one who dislikes sand the most is
           <br />
           <span className="text-ethlas-yellow">{rankedNames[0].name}</span>

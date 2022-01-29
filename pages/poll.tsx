@@ -84,17 +84,17 @@ const Home: NextPage = ({
     <>
       <Navbar />
       <Body>
-        <div className="min-h-screen flex flex-col gap-8 sm:gap-4 justify-center items-center">
+        <div className="flex flex-col gap-8 justify-center items-center min-h-screen sm:gap-4">
           {countdown <= 0 ? (
             <>
-              <h1 className="text-4xl text-white text-center mb-12">
+              <h1 className="mb-12 text-4xl text-center text-white">
                 Who dislikes{" "}
-                <span className="uppercase font-semibold text-amber-500">
+                <span className="font-semibold text-amber-500 uppercase">
                   sand
                 </span>{" "}
                 more?
               </h1>
-              <div className="text-xl flex flex-col sm:flex-row gap-12 sm:gap-16">
+              <div className="flex flex-col gap-12 text-xl sm:flex-row sm:gap-16">
                 <PersonCard
                   person={firstPerson}
                   saveVote={() => saveVote("first")}

@@ -24,12 +24,12 @@ const Countdown: FC<Props> = ({ setCountdown }) => {
         strokeWidth={6}
       >
         {({ remainingTime }) => (
-          <span className="text-white text-xl font-semibold">
+          <span className="text-xl font-semibold text-white">
             {remainingTime}
           </span>
         )}
       </CountdownCircleTimer>
-      <div className="grid grid-cols-2 h-14 gap-4 w-full">
+      <div className="grid grid-cols-2 gap-4 w-full h-14">
         <Button href="/results">Results</Button>
         <Button onClick={() => setCountdown(0)}>Next</Button>
       </div>

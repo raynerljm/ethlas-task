@@ -14,7 +14,7 @@ type Props = {
 const Body: FC<Props> = ({ children, className }) => {
   return (
     <>
-      <main className="min-h-screen w-full bg-gradient-black flex">
+      <main className="flex w-full min-h-screen bg-gradient-black">
         <div
           className={`mx-auto max-w-7xl min-h-screen w-full px-4 ${className}`}
         >

@@ -11,7 +11,7 @@ import Navlink from "./Navlink";
 
 const Navbar: FC = () => {
   return (
-    <nav className="fixed top-0 h-16 w-full px-4 flex items-center">
+    <nav className="flex fixed top-0 items-center px-4 w-full h-16">
       <Link href="/" passHref>
         <Image
           src="/images/sand_brand.png"
@@ -19,10 +19,10 @@ const Navbar: FC = () => {
           layout="fixed"
           height={32}
           width={32}
-          className="cursor-pointer filter hover:invert transition-all hover:scale-95"
+          className="transition-all cursor-pointer hover:scale-95 filter hover:invert"
         />
       </Link>
-      <div className="flex gap-8 ml-4 mt-1">
+      <div className="flex gap-8 mt-1 ml-4">
         <Navlink href="/">Home</Navlink>
         <Navlink href="/poll">Poll</Navlink>
         <Navlink href="/results">Results</Navlink>

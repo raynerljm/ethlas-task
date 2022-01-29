@@ -17,25 +17,25 @@ const Home: NextPage = () => {
       <Loading />
       <Navbar />
       <Body className="grid place-items-center">
-        <div className="flex flex-col items-center gap-8">
-          <h1 className="text-6xl text-white font-semibold text-center text-opacity-90">
+        <div className="flex flex-col gap-8 items-center">
+          <h1 className="text-6xl font-semibold text-center text-white text-opacity-90">
             Who dislikes
             <br />
             <span className="text-7xl text-gradient-orange">sand</span>?
           </h1>
-          <div className="h-16 flex flex-col items-center overflow-hidden">
+          <div className="flex overflow-hidden flex-col items-center h-16">
             <div className="animate-show">
-              <div className="carousel-name-box bg-blue-900">
+              <div className="bg-blue-900 carousel-name-box">
                 Luke Skywalker
               </div>
             </div>
             <div className="">
-              <div className="carousel-name-box bg-green-900">
+              <div className="bg-green-900 carousel-name-box">
                 Jar Jar Binks
               </div>
             </div>
             <div className="">
-              <div className="carousel-name-box bg-red-900">Count Dooku</div>
+              <div className="bg-red-900 carousel-name-box">Count Dooku</div>
             </div>
           </div>
           <Button className="w-48 h-14" href="/poll">

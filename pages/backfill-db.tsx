@@ -40,7 +40,7 @@ const Backfill: NextPage = () => {
     <Body>
       {seeding ? (
         <>
-          <h1 className="text-white text-2xl mb-8 pt-4">
+          <h1 className="pt-4 mb-8 text-2xl text-white">
             Backfilling in progress...
           </h1>
           <div className="flex flex-col gap-1 pb-4">
@@ -58,7 +58,7 @@ const Backfill: NextPage = () => {
               fetchData();
               setSeeding(true);
             }}
-            className="bg-white text-xl font-semibold py-4 px-8 rounded-xl"
+            className="py-4 px-8 text-xl font-semibold bg-white rounded-xl"
           >
             Seed Database
           </button>
