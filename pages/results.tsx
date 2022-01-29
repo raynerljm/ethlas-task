@@ -1,24 +1,32 @@
+// Next and React Imports
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from "next";
+// Prisma
 import { prisma } from "../lib/prisma";
+// Components
 import Body from "../components/Layout/Body";
 import ResultsBar from "../components/Results/ResultsBar";
+import Navbar from "../components/Layout/Navbar";
+import Footer from "../components/Layout/Footer";
+// Util Functions
 import { processVotes } from "../utils/processVotes";
 import { processVoteMap } from "../utils/processVoteMap";
-import Navbar from "../components/Layout/Navbar";
+import { initEmptyVoteSelection } from "../utils/initEmptyVoteSelection";
+// Types
 import { RankedName } from "../types";
-import Footer from "../components/Layout/Footer";
-
-const emptyVoteSelection = { for: "", against: "" };
-const limit = Number.MAX_SAFE_INTEGER;
+import { emptyVoteSelection, MAX_PERSON_ID } from "../constants";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const votes = await prisma.vote.findMany();
   const voteMap = processVotes(votes);
-  const { rankedNames } = processVoteMap(voteMap, emptyVoteSelection, limit);
+  const { rankedNames } = processVoteMap(
+    voteMap,
+    initEmptyVoteSelection(),
+    MAX_PERSON_ID
+  );
   return {
     props: {
       rankedNames,

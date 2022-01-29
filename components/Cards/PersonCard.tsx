@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Person } from "../../types";
 import Button from "../Button";
 import { FALLBACK_IMAGE } from "../../constants";
-import Body from "../Layout/Body";
 
 type Props = {
   person: Person;

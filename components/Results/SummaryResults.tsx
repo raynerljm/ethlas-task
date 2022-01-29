@@ -1,5 +1,4 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { Vote } from "../../types";
 import { processVoteMap } from "../../utils/processVoteMap";
 import Countdown from "./Countdown";
 import ResultsBar from "./ResultsBar";

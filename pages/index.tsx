@@ -1,10 +1,12 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+// Components
 import LandingPageLoading from "../components/EmptyStates/LandingPageLoading";
 import Body from "../components/Layout/Body";
 import Button from "../components/Button";
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
-import { useEffect, useState } from "react";
+// Constants
 import { BLUE_NAMES, GREEN_NAMES, RED_NAMES } from "../constants";
 
 /**

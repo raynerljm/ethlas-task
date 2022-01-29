@@ -1,7 +1,11 @@
+// Next and React
 import type { NextPage } from "next";
 import { useState } from "react";
+// Components
 import Body from "../components/Layout/Body";
+// Constants
 import { STARWARS_API_AKABAB } from "../constants";
+// Types
 import { Person } from "../types";
 
 /**

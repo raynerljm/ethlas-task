@@ -1,20 +1,27 @@
+// Next and React
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
   NextPage,
 } from "next";
 import { useEffect, useState } from "react";
-import Body from "../components/Layout/Body";
-import PersonCard from "../components/Cards/PersonCard";
-import SummaryResults from "../components/Results/SummaryResults";
-import { COUNTDOWN_TIME } from "../constants";
+// Prisma
 import { prisma } from "../lib/prisma";
-import { getTwoIds } from "../utils/getRandomPerson";
+// Components
+import Body from "../components/Layout/Body";
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
-import { Person, Vote } from "../types";
+import PersonCard from "../components/Cards/PersonCard";
+import SummaryResults from "../components/Results/SummaryResults";
+// Constants
+import { COUNTDOWN_TIME } from "../constants";
+// Util Functions
 import { processVotes } from "../utils/processVotes";
 import { updateVoteMap } from "../utils/updateVoteMap";
+import { getTwoIds } from "../utils/getRandomPerson";
+import { initEmptyVoteSelection } from "../utils/initEmptyVoteSelection";
+// Types
+import { Person, Vote } from "../types";
 
 /**
  * Server-side function that runs upon a request by a user.
@@ -59,7 +66,7 @@ const Home: NextPage = ({
   // The countdown for showing the summary results page
   const [countdown, setCountdown] = useState(0);
   // The most recent selected vote (to render options chosen in the summary results page)
-  const [voteSelection, setVoteSelection] = useState({ for: "", against: "" });
+  const [voteSelection, setVoteSelection] = useState(initEmptyVoteSelection());
 
   /**
    * Saves most recent vote into the database.

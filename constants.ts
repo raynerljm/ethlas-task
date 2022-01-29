@@ -17,6 +17,10 @@ export const FALLBACK_IMAGE = "/images/empty-image.png";
 // Countdown timer to show brief results summary before next pair
 export const COUNTDOWN_TIME = 5;
 
+// Empty fields when no selection has been made
+export const emptyVoteSelection = { for: "", against: "" };
+
+// List of names from which to randomly generate landing page
 export const BLUE_NAMES = [
   "Luke Skywalker",
   "Obi-wan Kenobi",
