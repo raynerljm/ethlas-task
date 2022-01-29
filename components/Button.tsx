@@ -17,7 +17,7 @@ const Button: FC<Props> = ({
 }) => {
   const withoutLink = (
     <button
-      className={`bg-gradient-orange uppercase text-white font-semibold text-lg tracking-widest shadow-md rounded-full grid place-items-center group-hover:scale-95 transition-all group-hover:bg-gradient-blue ${className}`}
+      className={`bg-gradient-orange uppercase text-white font-semibold text-lg tracking-widest shadow-md rounded-full grid place-items-center group-hover:scale-95 transition-all group-hover:bg-gradient-blue ${className} hover:scale-95 hover:bg-gradient-blue`}
       onClick={onClick}
     >
       {isSubmitting ? <span>Loading...</span> : children}

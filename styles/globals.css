@@ -11,8 +11,16 @@ body {
     @apply bg-gradient-to-l from-ethlas-blue to-ethlas-purple;
   }
 
+  .text-gradient-blue {
+    @apply bg-gradient-blue text-transparent bg-clip-text;
+  }
+
   .bg-gradient-orange {
     @apply bg-gradient-to-b from-ethlas-orange to-ethlas-yellow;
+  }
+
+  .text-gradient-orange {
+    @apply bg-gradient-orange text-transparent bg-clip-text;
   }
 
   .bg-gradient-black {
@@ -25,7 +33,7 @@ body {
   }
 
   .animate-sand-1 {
-    @apply animate-sand;
+    animation: jumb 3s infinite;
     animation-delay: 0s;
   }
 
@@ -42,5 +50,33 @@ body {
   .animate-sand-4 {
     @apply animate-sand;
     animation-delay: 0.3s;
+  }
+
+  .typed-out {
+    @apply w-0 animate-typing whitespace-nowrap text-3xl overflow-hidden text-ethlas-yellow;
+  }
+
+  .typed-out-2 {
+    @apply typed-out;
+    animation-delay: 1.5s;
+  }
+
+  .typed-out-3 {
+    @apply typed-out;
+    animation-delay: 2.5s;
+  }
+
+  .typed-out-4 {
+    @apply typed-out;
+    animation-delay: 4s;
+  }
+
+  .typed-out-5 {
+    @apply typed-out;
+    animation-delay: 5.5s;
+  }
+
+  .carousel-name-box {
+    @apply text-white py-3 px-6 mb-16 h-16 w-72 text-3xl grid place-items-center rounded-2xl opacity-90;
   }
 }

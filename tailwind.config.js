@@ -17,6 +17,8 @@ module.exports = {
       },
       animation: {
         jumb: "jumb 3s infinite",
+        typing: "typing 1s steps(50, end) forwards",
+        show: "show 5s linear infinite",
       },
       keyframes: {
         jumb: {
@@ -30,6 +32,24 @@ module.exports = {
           "70%": {
             transform: "translateY(0px)",
           },
+        },
+        typing: {
+          "0%": {
+            width: "0%",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
+        show: {
+          "0%": { marginTop: "-384px" },
+          "5%": { marginTop: "-256px" },
+          "33%": { marginTop: "-256px" },
+          "38%": { marginTop: "-128px" },
+          "66%": { marginTop: "-128px" },
+          "71%": { marginTop: "0px" },
+          "99.99%": { marginTop: "0px" },
+          "100%": { marginTop: "-384px" },
         },
       },
     },

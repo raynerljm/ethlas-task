@@ -1,119 +1,42 @@
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Body from "../components/Layout/Body";
+import type { NextPage } from "next";
 import Loading from "../components/EmptyStates/Loading";
-import PersonCard from "../components/Cards/PersonCard";
-import Results from "../components/Results/SummaryResults";
-import { COUNTDOWN_TIME } from "../constants";
-import { prisma } from "../lib/prisma";
-import { getTwoIds } from "../utils/getRandomPerson";
+import Body from "../components/Layout/Body";
+import Button from "../components/Button";
+import Navbar from "../components/Layout/Navbar";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { first, second } = getTwoIds();
-  const firstPerson = await prisma.person.findUnique({
-    where: { id: first },
-  });
-  const secondPerson = await prisma.person.findUnique({
-    where: { id: second },
-  });
-  const votes = await prisma.vote.findMany();
-  return {
-    props: {
-      firstPerson,
-      secondPerson,
-      votes,
-    },
-  };
-};
-
-/**
- * Page that renders the poll where users can vote who dislikes sand more.
- *
- * @returns {NextPage}
- */
-
-const Home: NextPage = ({
-  firstPerson,
-  secondPerson,
-  votes,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter();
-  const [countdown, setCountdown] = useState(0);
-  const [voteSelection, setVoteSelection] = useState({ for: "", against: "" });
-  async function saveVote(selected: string) {
-    const vote = {
-      votedFor: selected === "first" ? firstPerson.id : secondPerson.id,
-      votedForName: selected === "first" ? firstPerson.name : secondPerson.name,
-      votedAgainst: selected === "first" ? secondPerson.id : firstPerson.id,
-      votedAgainstName:
-        selected === "first" ? secondPerson.name : firstPerson.name,
-    };
-    const response = await fetch("/api/vote", {
-      method: "POST",
-      body: JSON.stringify(vote),
-    });
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    router.replace(router.asPath);
-    setVoteSelection({
-      for: vote.votedForName,
-      against: vote.votedAgainstName,
-    });
-    setCountdown(COUNTDOWN_TIME);
-  }
-
-  useEffect(() => {
-    if (countdown > 0) {
-      setTimeout(() => {
-        setCountdown((countdown) => countdown - 1);
-      }, 1000);
-    }
-  }, [countdown]);
-
+const Home: NextPage = () => {
   return (
     <>
       <Loading />
-      <Body>
-        <div className="min-h-screen flex flex-col gap-8 sm:gap-4 justify-center items-center">
-          {countdown <= 0 ? (
-            <>
-              <h1 className="text-4xl text-white text-center mb-12">
-                Who dislikes{" "}
-                <span className="uppercase font-semibold text-amber-500">
-                  sand
-                </span>{" "}
-                more?
-              </h1>
-              <div className="text-xl flex flex-col sm:flex-row gap-12 sm:gap-16">
-                <PersonCard
-                  person={firstPerson}
-                  saveVote={() => saveVote("first")}
-                />
-                <PersonCard
-                  person={secondPerson}
-                  saveVote={() => saveVote("second")}
-                />
+      <Navbar />
+      <Body className="grid place-items-center">
+        <div className="flex flex-col items-center gap-8">
+          <h1 className="text-6xl text-white font-semibold text-center text-opacity-90">
+            Who dislikes
+            <br />
+            <span className="text-7xl text-gradient-orange">sand</span>?
+          </h1>
+          <div className="h-16 flex flex-col items-center overflow-hidden">
+            <div className="animate-show">
+              <div className="carousel-name-box bg-blue-900">
+                Luke Skywalker
               </div>
-            </>
-          ) : (
-            <Results
-              votes={votes}
-              voteSelection={voteSelection}
-              setCountdown={setCountdown}
-            />
-          )}
+            </div>
+            <div className="">
+              <div className="carousel-name-box bg-green-900">
+                Jar Jar Binks
+              </div>
+            </div>
+            <div className="">
+              <div className="carousel-name-box bg-red-900">Count Dooku</div>
+            </div>
+          </div>
+          <Button className="w-48 h-14" href="/poll">
+            Vote Now
+          </Button>
         </div>
       </Body>
     </>
   );
 };
-
 export default Home;

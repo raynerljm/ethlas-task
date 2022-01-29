@@ -7,6 +7,7 @@ import { prisma } from "../lib/prisma";
 import Body from "../components/Layout/Body";
 import ResultsBar from "../components/Results/ResultsBar";
 import { processVotes } from "../utils/processVotes";
+import Navbar from "../components/Layout/Navbar";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const votes = await prisma.vote.findMany();
@@ -31,15 +32,18 @@ const results: NextPage = ({
   const { rankedNames } = processVotes(votes, emptyVoteSelection, limit);
 
   return (
-    <Body>
-      {rankedNames.map((rankedName) => (
-        <ResultsBar
-          key={rankedName.name}
-          rankedName={rankedName}
-          voteSelection={emptyVoteSelection}
-        />
-      ))}
-    </Body>
+    <>
+      <Navbar />
+      <Body>
+        {rankedNames.map((rankedName) => (
+          <ResultsBar
+            key={rankedName.name}
+            rankedName={rankedName}
+            voteSelection={emptyVoteSelection}
+          />
+        ))}
+      </Body>
+    </>
   );
 };
 export default results;

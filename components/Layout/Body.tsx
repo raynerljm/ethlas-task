@@ -1,10 +1,18 @@
 import { FC } from "react";
 
-const Body: FC = ({ children }) => {
+type Props = {
+  className?: string;
+};
+
+const Body: FC<Props> = ({ children, className }) => {
   return (
     <>
-      <main className="min-h-screen w-full bg-gradient-black">
-        <div className="max-w-7xl w-full px-4">{children}</div>
+      <main className="min-h-screen w-full bg-gradient-black flex">
+        <div
+          className={`mx-auto max-w-7xl min-h-screen w-full px-4 ${className}`}
+        >
+          {children}
+        </div>
       </main>
     </>
   );
