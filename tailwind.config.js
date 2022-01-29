@@ -16,23 +16,12 @@ module.exports = {
         "ethlas-black": "#151515",
       },
       animation: {
-        jumb: "jumb 3s infinite",
+        // For the landing page loading screen
         typing: "typing 1s steps(50, end) forwards",
+        // For landing page name carousel
         show: "show 5s linear infinite",
       },
       keyframes: {
-        jumb: {
-          "0%": {
-            transform: "translateY(0px)",
-          },
-          "35%": {
-            transform: "translateY(-30px)",
-            boxShadow: "0 15px 0 #DD9810",
-          },
-          "70%": {
-            transform: "translateY(0px)",
-          },
-        },
         typing: {
           "0%": {
             width: "0%",

@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-overpass;
+@layer base {
+  body {
+    @apply font-overpass;
+  }
 }
 
 @layer components {
@@ -27,30 +29,7 @@ body {
     @apply bg-gradient-to-bl from-ethlas-black to-ethlas-purple via-ethlas-black;
   }
 
-  .animate-sand {
-    padding: 0 15px;
-    @apply animate-jumb text-ethlas-yellow;
-  }
-
-  .animate-sand-1 {
-    animation: jumb 3s infinite;
-    animation-delay: 0s;
-  }
-
-  .animate-sand-2 {
-    @apply animate-sand;
-    animation-delay: 0.1s;
-  }
-
-  .animate-sand-3 {
-    @apply animate-sand;
-    animation-delay: 0.2s;
-  }
-
-  .animate-sand-4 {
-    @apply animate-sand;
-    animation-delay: 0.3s;
-  }
+  /* For landing page loading screen */
 
   .typed-out {
     @apply w-0 animate-typing whitespace-nowrap overflow-hidden text-ethlas-yellow;
@@ -75,6 +54,8 @@ body {
     @apply typed-out;
     animation-delay: 5.5s;
   }
+
+  /* For landing page name carousel */
 
   .carousel-name-box {
     @apply text-white py-3 px-6 mb-16 h-16 w-72 text-3xl grid place-items-center rounded-2xl opacity-90 whitespace-nowrap;
