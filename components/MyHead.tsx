@@ -10,10 +10,10 @@ import Head from "next/head";
 const MyHead: FC = () => {
   return (
     <Head>
-      <title>Starwars - Who dislikes sand more?</title>
+      <title>Starwars - Who dislikes sand?</title>
       <meta
         name="description"
-        content="A voting application to finally find out who hates sand the most"
+        content="A voting application to finally find out who hates sand the most. Built for an Ethlas Task"
       />
       <link rel="icon" href="/favicon.ico" />
     </Head>

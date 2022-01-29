@@ -13,7 +13,7 @@ const LandingPageLoading: FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setFaded(true);
-    }, 700000);
+    }, 7000);
   }, []);
 
   return (
