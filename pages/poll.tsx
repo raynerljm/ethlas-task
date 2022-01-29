@@ -80,14 +80,6 @@ const Home: NextPage = ({
       votedAgainstName: isFirst ? secondPerson.name : firstPerson.name,
     };
 
-    // Making the POST request
-    const response = await fetch("/api/vote", {
-      method: "POST",
-      body: JSON.stringify(vote),
-    });
-
-    if (!response.ok) throw new Error(response.statusText);
-
     // Increment the vote count locally
     setVoteMap(updateVoteMap(voteMap, vote));
 
@@ -100,6 +92,14 @@ const Home: NextPage = ({
     });
     // Refreshes the countdown timer
     setCountdown(COUNTDOWN_TIME);
+
+    // Making the POST request
+    const response = await fetch("/api/vote", {
+      method: "POST",
+      body: JSON.stringify(vote),
+    });
+
+    if (!response.ok) throw new Error(response.statusText);
   };
 
   /**

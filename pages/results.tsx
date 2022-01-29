@@ -38,13 +38,13 @@ const results: NextPage = ({
   return (
     <>
       <Navbar />
-      <Body className="flex flex-col gap-8 justify-center items-center">
+      <Body className="flex flex-col gap-8 justify-center items-center my-24">
         <h1 className="text-3xl text-center text-white">
           The one who dislikes sand the most is
           <br />
           <span className="text-ethlas-yellow">{rankedNames[0].name}</span>
         </h1>
-        <div className="w-1/2">
+        <div className="w-1/2 flex flex-col gap-1">
           {rankedNames.map((rankedName: RankedName) => (
             <ResultsBar
               key={rankedName.name}
