@@ -22,6 +22,7 @@ import { getTwoIds } from "../utils/getRandomPerson";
 import { initEmptyVoteSelection } from "../utils/initEmptyVoteSelection";
 // Types
 import { Person, Vote } from "../types";
+import ErrorScreen from "../components/EmptyStates/Error";
 
 /**
  * Server-side function that runs upon a request by a user.
@@ -67,6 +68,8 @@ const Home: NextPage = ({
   const [countdown, setCountdown] = useState(0);
   // The most recent selected vote (to render options chosen in the summary results page)
   const [voteSelection, setVoteSelection] = useState(initEmptyVoteSelection());
+  // Error handling
+  const [error, setError] = useState<string>("");
 
   /**
    * Saves most recent vote into the database.
@@ -106,7 +109,9 @@ const Home: NextPage = ({
       body: JSON.stringify(vote),
     });
 
-    if (!response.ok) throw new Error(response.statusText);
+    if (!response.ok) {
+      setError(response.statusText);
+    }
   };
 
   /**
@@ -137,6 +142,7 @@ const Home: NextPage = ({
 
   // Instantaneous so did not create a loading component for this
   if (!firstPerson || !secondPerson) return <div>Loading...</div>;
+  if (error) return <ErrorScreen error={error} />;
 
   return (
     <>
