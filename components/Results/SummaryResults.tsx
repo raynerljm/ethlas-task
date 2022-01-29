@@ -1,11 +1,11 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Vote } from "../../types";
-import { processVotes } from "../../utils/processVotes";
+import { processVoteMap } from "../../utils/processVoteMap";
 import Countdown from "./Countdown";
 import ResultsBar from "./ResultsBar";
 
 type Props = {
-  votes: Vote[];
+  voteMap: { [key: number]: { votes: number; total: number } };
   voteSelection: { for: string; against: string };
   setCountdown: Dispatch<SetStateAction<number>>;
 };
@@ -16,8 +16,16 @@ type Props = {
  * @returns {FC}
  */
 
-const SummaryResults: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
-  const { rankedNames, votedForCount } = processVotes(votes, voteSelection, 3);
+const SummaryResults: FC<Props> = ({
+  voteMap,
+  voteSelection,
+  setCountdown,
+}) => {
+  const { rankedNames, votedForCount } = processVoteMap(
+    voteMap,
+    voteSelection,
+    3
+  );
 
   return (
     <>

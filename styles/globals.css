@@ -77,6 +77,6 @@ body {
   }
 
   .carousel-name-box {
-    @apply text-white py-3 px-6 mb-16 h-16 w-72 text-3xl grid place-items-center rounded-2xl opacity-90;
+    @apply text-white py-3 px-6 mb-16 h-16 w-72 text-3xl grid place-items-center rounded-2xl opacity-90 whitespace-nowrap;
   }
 }

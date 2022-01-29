@@ -7,7 +7,7 @@ import { FC, useEffect, useState } from "react";
  * @returns {FC}
  */
 
-const Loading: FC = () => {
+const LandingPageLoading: FC = () => {
   const [faded, setFaded] = useState(false);
 
   useEffect(() => {
@@ -53,4 +53,4 @@ const Loading: FC = () => {
     </>
   );
 };
-export default Loading;
+export default LandingPageLoading;

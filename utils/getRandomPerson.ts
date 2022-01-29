@@ -26,11 +26,11 @@ export const getRandomId = (invalidIds?: number[]): number => {
  * @returns {first: number, second:number}
  */
 
-export const getTwoIds = (): { first: number; second: number } => {
-  const first = getRandomId(INVALID_PERSON_ID);
-  const second = getRandomId([...INVALID_PERSON_ID, first]);
+export const getTwoIds = (): { firstId: number; secondId: number } => {
+  const firstId = getRandomId(INVALID_PERSON_ID);
+  const secondId = getRandomId([...INVALID_PERSON_ID, firstId]);
   return {
-    first,
-    second,
+    firstId,
+    secondId,
   };
 };

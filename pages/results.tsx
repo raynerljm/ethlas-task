@@ -7,16 +7,18 @@ import { prisma } from "../lib/prisma";
 import Body from "../components/Layout/Body";
 import ResultsBar from "../components/Results/ResultsBar";
 import { processVotes } from "../utils/processVotes";
+import { processVoteMap } from "../utils/processVoteMap";
 import Navbar from "../components/Layout/Navbar";
 import { RankedName } from "../types";
 import Footer from "../components/Layout/Footer";
 
 const emptyVoteSelection = { for: "", against: "" };
+const limit = Number.MAX_SAFE_INTEGER;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const votes = await prisma.vote.findMany();
-  const limit = Number.MAX_SAFE_INTEGER;
-  const { rankedNames } = processVotes(votes, emptyVoteSelection, limit);
+  const voteMap = processVotes(votes);
+  const { rankedNames } = processVoteMap(voteMap, emptyVoteSelection, limit);
   return {
     props: {
       rankedNames,
