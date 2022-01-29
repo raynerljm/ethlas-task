@@ -13,18 +13,18 @@ const LandingPageLoading: FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setFaded(true);
-    }, 7000);
+    }, 700000);
   }, []);
 
   return (
     <>
       <div
-        className={`absolute z-10 h-screen w-full bg-gradient-black grid place-items-center transition-all duration-1000 ${
+        className={`absolute z-30 h-screen w-full bg-gradient-black grid place-items-center transition-all duration-1000 ${
           faded ? "-translate-y-full opacity-0" : "translate-y-0"
         }`}
       >
         <div
-          className="w-[512px] flex flex-col gap-4 cursor-alias"
+          className="mx-4 w-72 sm:w-80 md:w-[512px] text-base sm:text-lg md:text-3xl flex flex-col gap-4 cursor-alias"
           onClick={() => setFaded(true)}
         >
           <section className="">

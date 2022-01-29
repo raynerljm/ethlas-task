@@ -52,7 +52,7 @@ const results: NextPage = ({
           <br />
           <span className="text-ethlas-yellow">{rankedNames[0].name}</span>
         </h1>
-        <div className="flex flex-col gap-1 w-1/2">
+        <div className="flex flex-col gap-1 w-3/4">
           {rankedNames.map((rankedName: RankedName) => (
             <ResultsBar
               key={rankedName.name}

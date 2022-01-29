@@ -53,7 +53,7 @@ body {
   }
 
   .typed-out {
-    @apply w-0 animate-typing whitespace-nowrap text-3xl overflow-hidden text-ethlas-yellow;
+    @apply w-0 animate-typing whitespace-nowrap overflow-hidden text-ethlas-yellow;
   }
 
   .typed-out-2 {

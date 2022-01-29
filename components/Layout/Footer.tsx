@@ -15,7 +15,7 @@ const Footer: FC = () => {
         href={GITHUB_LINK}
         target="_blank"
         rel="noreferrer"
-        className="flex gap-1 items-center opacity-30 hover:opacity-100 filter"
+        className="text-xs sm:text-base flex gap-1 items-center opacity-30 hover:opacity-100 filter"
       >
         <div className="flex items-center mb-1">
           <Image
@@ -32,7 +32,7 @@ const Footer: FC = () => {
         href={LINKEDIN_LINK}
         target="_blank"
         rel="noreferrer"
-        className="ml-auto opacity-30 hover:opacity-100"
+        className="text-xs sm:text-base ml-auto opacity-30 hover:opacity-100"
       >
         Made by Rayner for an Ethlas Task
       </a>
