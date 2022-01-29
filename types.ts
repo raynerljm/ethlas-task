@@ -1,5 +1,3 @@
-import { TouchEventHandler } from "react";
-
 export interface Vote extends VoteWithoutId {
   id: string;
 }
