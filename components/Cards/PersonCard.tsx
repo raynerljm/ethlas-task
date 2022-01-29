@@ -10,6 +10,15 @@ type Props = {
   saveVote: () => void;
 };
 
+/**
+ * Renders the display card of a Starwars person.
+ * Also where users click to vote.
+ *
+ * @param {Person} person Starwars person to render.
+ * @param {() => void} saveVote Saves the current vote of the user into the database.
+ * @returns {FC}
+ */
+
 const PersonCard: FC<Props> = ({ person, saveVote }) => {
   const [isImageError, setImageError] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);

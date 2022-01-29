@@ -2,6 +2,12 @@ import Image from "next/image";
 import { FC } from "react";
 import { GITHUB_LINK, LINKEDIN_LINK } from "../../constants";
 
+/**
+ * Renders a fixed sticky footer that displays a link to GitHub.
+ *
+ * @returns {FC}
+ */
+
 const Footer: FC = () => {
   return (
     <footer className="fixed bottom-0 w-full h-8 flex items-center px-4 text-white text-lg">

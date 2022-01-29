@@ -3,9 +3,13 @@ import { FC } from "react";
 import Link from "next/link";
 import Navlink from "./Navlink";
 
-type Props = {};
+/**
+ * Renders a fixed Navbar on the top for users to navigate the web app.
+ *
+ * @returns {FC}
+ */
 
-const Navbar: FC<Props> = () => {
+const Navbar: FC = () => {
   return (
     <nav className="fixed top-0 h-16 w-full px-4 flex items-center">
       <Link href="/" passHref>

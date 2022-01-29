@@ -5,6 +5,15 @@ type Props = {
   voteSelection: { for: string; against: string };
 };
 
+/**
+ * Renders a single result bar for a single Starwars person.
+ * If it is a voted for person, it is yellow.
+ * Else If it is a voted against person, it is red.
+ * Else it is white.
+ *
+ * @returns {FC}
+ */
+
 const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
   return (
     <>

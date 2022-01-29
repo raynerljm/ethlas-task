@@ -1,5 +1,11 @@
 import { FC, useEffect, useState } from "react";
-import Button from "../Button";
+
+/**
+ * Displays an animation of a quote by Anakin before fading away.
+ * Used as a loading screen.
+ *
+ * @returns {FC}
+ */
 
 const Loading: FC = () => {
   const [faded, setFaded] = useState(false);

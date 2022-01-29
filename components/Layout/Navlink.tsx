@@ -5,6 +5,13 @@ type Props = {
   href: string;
 };
 
+/**
+ * Renders a single Navigation link.
+ * To be used in the Navbar.
+ *
+ * @returns {FC}
+ */
+
 const Navlink: FC<Props> = ({ children, href }) => {
   return (
     <Link href={href} passHref>

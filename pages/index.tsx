@@ -5,6 +5,12 @@ import Button from "../components/Button";
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
 
+/**
+ * Returns a landing page with a CTA to vote.
+ *
+ * @returns
+ */
+
 const Home: NextPage = () => {
   return (
     <>

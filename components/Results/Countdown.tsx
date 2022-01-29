@@ -7,6 +7,12 @@ type Props = {
   setCountdown: Dispatch<SetStateAction<number>>;
 };
 
+/**
+ * Renders a countdown timer that displays after a vote.
+ *
+ * @returns {FC}
+ */
+
 const Countdown: FC<Props> = ({ setCountdown }) => {
   return (
     <>

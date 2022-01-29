@@ -10,6 +10,12 @@ type Props = {
   setCountdown: Dispatch<SetStateAction<number>>;
 };
 
+/**
+ * Renders the summary page that displays after each vote.
+ *
+ * @returns {FC}
+ */
+
 const SummaryResults: FC<Props> = ({ votes, voteSelection, setCountdown }) => {
   const { rankedNames, votedForCount } = processVotes(votes, voteSelection, 3);
 
