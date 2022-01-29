@@ -16,3 +16,6 @@ export const FALLBACK_IMAGE = "/images/empty-image.png";
 
 // Countdown timer to show brief results summary before next pair
 export const COUNTDOWN_TIME = 5;
+
+export const GITHUB_LINK = "https://github.com/raynerljm/ethlas-task";
+export const LINKEDIN_LINK = "https://www.linkedin.com/in/raypuff/";

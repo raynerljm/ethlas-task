@@ -13,6 +13,7 @@ import { COUNTDOWN_TIME } from "../constants";
 import { prisma } from "../lib/prisma";
 import { getTwoIds } from "../utils/getRandomPerson";
 import Navbar from "../components/Layout/Navbar";
+import Footer from "../components/Layout/Footer";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { first, second } = getTwoIds();
@@ -113,6 +114,8 @@ const Home: NextPage = ({
           )}
         </div>
       </Body>
+
+      <Footer />
     </>
   );
 };

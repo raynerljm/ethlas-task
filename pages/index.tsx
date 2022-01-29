@@ -3,6 +3,7 @@ import Loading from "../components/EmptyStates/Loading";
 import Body from "../components/Layout/Body";
 import Button from "../components/Button";
 import Navbar from "../components/Layout/Navbar";
+import Footer from "../components/Layout/Footer";
 
 const Home: NextPage = () => {
   return (
@@ -36,6 +37,7 @@ const Home: NextPage = () => {
           </Button>
         </div>
       </Body>
+      <Footer />
     </>
   );
 };

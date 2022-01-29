@@ -11,3 +11,9 @@ export type Person = {
   name: string;
   image: string;
 };
+
+export type RankedName = {
+  name: string;
+  percentage: number;
+  position: number;
+};
