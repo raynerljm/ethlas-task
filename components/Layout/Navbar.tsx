@@ -11,7 +11,7 @@ import Navlink from "./Navlink";
 
 const Navbar: FC = () => {
   return (
-    <nav className="flex fixed z-20 top-0 items-center px-4 w-full h-16 bg-ethlas-black">
+    <nav className="flex fixed top-0 z-20 items-center px-4 w-full h-16 bg-ethlas-black">
       <Link href="/" passHref>
         <Image
           src="/images/sand_brand.png"

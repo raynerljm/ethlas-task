@@ -17,7 +17,7 @@ type Props = {
 const ResultsBar: FC<Props> = ({ rankedName, voteSelection }) => {
   return (
     <>
-      <div className="grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 sm:gap-4">
+      <div className="grid grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 sm:gap-4">
         <h1
           className={`whitespace-nowrap self-center ${
             voteSelection.for === rankedName.name

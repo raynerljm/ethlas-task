@@ -28,7 +28,7 @@ const SummaryResults: FC<Props> = ({
 
   return (
     <>
-      <div className="pt-6 flex flex-col gap-6 items-center">
+      <div className="flex flex-col gap-6 items-center pt-6">
         <p className="text-3xl text-center text-white">
           You voted for{" "}
           <span className="text-ethlas-yellow">{voteSelection.for}</span>
@@ -37,7 +37,7 @@ const SummaryResults: FC<Props> = ({
             similarly
           </p>
         </p>
-        <h1 className="sm:mt-8 text-4xl font-semibold text-center text-white">
+        <h1 className="text-4xl font-semibold text-center text-white sm:mt-8">
           Rankings
         </h1>
         <div className="flex flex-col gap-1 w-3/4">
